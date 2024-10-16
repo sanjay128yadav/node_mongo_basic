@@ -1,7 +1,15 @@
-const app=require('./app')
-let arr=[4,1,6,3,4,89,0];
-console.log(app.xyz())
-const result =arr.filter((item)=>{
-    return item>=4
+let a =20;
+let b= 0;
+
+let wdata = new Promise((Resolve, Reject)=> {
+
+    setTimeout(()=>{
+        Resolve(40);
+    }, 5000);
+
 });
-console.warn(result);
+
+wdata.then((data)=>{
+    b = data;
+    console.log(a+b);
+})
