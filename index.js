@@ -1,7 +1,7 @@
-const app=require('./app')
-let arr=[4,1,6,3,4,89,0];
-console.log(app.xyz())
-const result =arr.filter((item)=>{
-    return item>=4
-});
-console.warn(result);
+const fs = require('fs');
+
+//console.log(process.argv);
+
+const input = process.argv;
+console.log(input[2], input[3]);
+fs.writeFileSync(input[2], input[3]);
