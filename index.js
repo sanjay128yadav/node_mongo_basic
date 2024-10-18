@@ -1,21 +1,16 @@
-const fs = require('fs');
+const express = require('express');
 
-const path = require('path');
+const app = express();
 
-// fs.writeFileSync('apple.txt', 'Apple is from JK');
-
-const dirPath = path.join(__dirname, 'files');
-//console.log(dirPath);
-
-/*
-for(i=0; i <5 ; i++) {
-    fs.writeFileSync(`${dirPath}/fruitsFile${i}.txt`, "Eat one Fruit daily");
-}
-    */
-
-fs.readdir(dirPath, (error, files)=>{
-    //console.log(files);
-    files.forEach((iteam)=>{
-        console.log('Files name is: '+iteam);
-    })
+app.get('', (req, resp) => {
+    resp.send('Home page');
+    resp.end();
 });
+
+app.get('/about', (req, resp) => {
+    resp.send('This is about page. Your most welcome Mr.' + req.query.name);
+    console.log('Data send through browser is:'+ req.query.name);
+    resp.end();
+});
+
+app.listen(4500);
