@@ -1,15 +1,21 @@
-let a =20;
-let b= 0;
+const fs = require('fs');
 
-let wdata = new Promise((Resolve, Reject)=> {
+const path = require('path');
 
-    setTimeout(()=>{
-        Resolve(40);
-    }, 5000);
+// fs.writeFileSync('apple.txt', 'Apple is from JK');
 
+const dirPath = path.join(__dirname, 'files');
+//console.log(dirPath);
+
+/*
+for(i=0; i <5 ; i++) {
+    fs.writeFileSync(`${dirPath}/fruitsFile${i}.txt`, "Eat one Fruit daily");
+}
+    */
+
+fs.readdir(dirPath, (error, files)=>{
+    //console.log(files);
+    files.forEach((iteam)=>{
+        console.log('Files name is: '+iteam);
+    })
 });
-
-wdata.then((data)=>{
-    b = data;
-    console.log(a+b);
-})
