@@ -22,7 +22,23 @@ app.get('/about', (requ, resp)=>{
 });
 
 app.get('/profile', (requ, resp)=>{
-    resp.render('profile');
+
+    const userdata = [
+        {name:'Sanjay Yadav', age:43},
+        {name:'Manoj Yadav', age:33},
+    ]
+
+    const user = { 
+        name: 'Sanjay yadav',
+        age: '42',
+        skills: ['Node', 'php', 'python']
+    }
+
+    resp.render('profile' , {user});
+});
+
+app.get('/login', (req, resp)=>{
+    resp.render('login');
 });
 
 app.get('*', (requ, resp)=>{
