@@ -1,21 +1,10 @@
-const fs = require('fs');
-
+const express = require('express');
 const path = require('path');
+const publicPath = path.join(__dirname, 'public');
 
-// fs.writeFileSync('apple.txt', 'Apple is from JK');
+const app = express();
 
-const dirPath = path.join(__dirname, 'files');
-//console.log(dirPath);
+// Code here to load static content pages
+app.use(express.static(publicPath));
 
-/*
-for(i=0; i <5 ; i++) {
-    fs.writeFileSync(`${dirPath}/fruitsFile${i}.txt`, "Eat one Fruit daily");
-}
-    */
-
-fs.readdir(dirPath, (error, files)=>{
-    //console.log(files);
-    files.forEach((iteam)=>{
-        console.log('Files name is: '+iteam);
-    })
-});
+app.listen(4200);
