@@ -1,15 +1,27 @@
-let a =20;
-let b= 0;
+const express = require('express');
 
-let wdata = new Promise((Resolve, Reject)=> {
+const app = express();
 
-    setTimeout(()=>{
-        Resolve(40);
-    }, 5000);
+const reqFilter = (req, resp, next)=>{
+    
+    if(!req.query.age){
+        resp.send('Please enter age!');
+    } else if(req.query.age < 18){
+        resp.send('You can not access this page');
+    } else {
+        next(); 
+    }
+         
+}
 
+app.use(reqFilter);
+
+app.get('', (req, resp)=>{
+    resp.send("Welcome to home page.");
 });
 
-wdata.then((data)=>{
-    b = data;
-    console.log(a+b);
-})
+app.get('/users', (req, resp)=>{
+    resp.send("Welcome to users page.");
+});
+
+app.listen(4500);
