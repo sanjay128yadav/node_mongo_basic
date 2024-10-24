@@ -1,32 +1,19 @@
-const express = require('express');
+const {MongoClient} = require('mongodb');
 
-const reqFilter = require('./middleware');
+//const mongodbClient = require(mongodb).mongodbClient; // both are same
 
-const route = express.Router();
+const url = 'mongodb://localhost:27017';
 
-const app = express();
+const database = 'e-comm';
 
-// Code for call Middleware at Application level
-//app.use(reqFilter);
+const client = new MongoClient(url);
 
-route.use(reqFilter);
+async function getData() {
+    let result = await client.connect();
+    let db = result.db(database);
+    let collection = db.collection('products');
+    let response = await collection.find({}).toArray();
+    console.log(response);
+}
 
-app.get('', (req, resp)=>{
-    resp.send("Welcome to home page.");
-});
-
-route.get('/users', (req, resp)=>{
-    resp.send("Welcome to users page.");
-});
-
-route.get('/about', reqFilter, (req, resp)=>{
-    resp.send("Welcome to about page.");
-});
-
-route.get('/contact', reqFilter, (req, resp)=>{
-    resp.send("Welcome to contact page.");
-});
-
-app.use('/', route);
-
-app.listen(4500);
+getData();
