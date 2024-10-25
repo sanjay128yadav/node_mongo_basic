@@ -1,19 +1,25 @@
-const {MongoClient} = require('mongodb');
 
-//const mongodbClient = require(mongodb).mongodbClient; // both are same
+const dbConnect = require('./mongodb');
 
-const url = 'mongodb://localhost:27017';
+//const gg = dbConnect();
+//console.log(gg);
 
-const database = 'e-comm';
+// Method one handle promice using .then
 
-const client = new MongoClient(url);
 
-async function getData() {
-    let result = await client.connect();
-    let db = result.db(database);
-    let collection = db.collection('products');
-    let response = await collection.find({}).toArray();
-    console.log(response);
+/* dbConnect().then((resp)=>{
+   const ts =  resp.find({name:'M-40'}).toArray().then((data)=>{
+     console.log(data);
+   })
+}); */
+
+
+// Method two handle promice using async & await
+
+const main = async ()=>{
+    let data = await dbConnect();
+    data     = await data.find({name:'IPRO-40'}).toArray();
+    console.log(data);
 }
 
-getData();
+main();
