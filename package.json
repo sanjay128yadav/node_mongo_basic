@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.21.1",
-    "exprexx": "^1.0.0"
+    "exprexx": "^1.0.0",
+    "mongoose": "^8.7.3"
   }
 }
