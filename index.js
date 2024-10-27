@@ -1,12 +1,17 @@
-const express = require('express');
+const mongoose = require('mongoose');
 
-const app = express();
+const main = async()=>{
+    await mongoose.connect("mongodb://localhost:27017/e-comm");
+    const ProductSchema = new mongoose.Schema({
+        name:String,
+        price: Number
+    });
 
-app.get('', (req, resp) => {
-    resp.send('Home page');
-    resp.end();
-});
+    const ProductModel = mongoose.model('products', ProductSchema);
 
+    let data    = new ProductModel({name:"One Pluse Node15", price:1000});
+    let result  = await data.save();
+    console.log(result);
+}
 
-
-app.listen(4500);
+main();
