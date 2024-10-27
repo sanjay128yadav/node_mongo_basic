@@ -1,5 +1,6 @@
 const express   = require('express');
 const dbConnect = require('./mongodb');
+const mongodb   = require('mongodb');
 
 const app = express();
 
@@ -23,6 +24,15 @@ app.put('/:name', async(req, resp)=>{
     if(result.acknowledged) {
         resp.send(result);
     }    
+});
+
+app.delete('/:id', async(req, resp)=>{
+    let db = await dbConnect();
+    let result = await db.deleteOne({_id: new mongodb.ObjectId (req.params.id)});
+    if(result.acknowledged) {
+        resp.send(result);
+    }
+
 });
 
 
