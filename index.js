@@ -30,6 +30,20 @@ app.put('/update/:_id', async(req, resp)=>{
     resp.send(result);
 });
 
+// Search API
 
+
+app.get("/search/:key", async (req, resp)=>{   
+    console.log(req.params.key);
+
+    let result = await Product.find({
+        "$or": [
+            {"name": {$regex: req.params.key}},
+            {"brand": {$regex: req.params.key}}
+        ]
+    });
+
+    resp.send(result);
+});
 
 app.listen(4500);
