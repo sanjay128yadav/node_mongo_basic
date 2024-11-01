@@ -1,21 +1,10 @@
-const express = require('express');
-const multer  = require('multer');
+const os = require("os");
 
-const app = express();
+console.log(os.arch());
 
-const upload = multer({
-    storage:multer.diskStorage({
-        destination:function(req, file, cb){
-            cb(null, "uploads");
-        },
-        filename:function(re, file, cb){
-            cb(null,file.fieldname+"-"+Date.now()+ ".jpg");
-        }
-    })
-}).single("user_file");
+console.log(os.freemem()/(1024*1024*1024));
+console.log(os.totalmem()/(1024*1024*1024));
 
-app.post('/upload', upload, (req, resp) => {   
-    resp.send("File Uploaded");
-});
-
-app.listen(4500);
+console.log(os.hostname());
+console.log(os.platform());
+console.log(os.userInfo());
